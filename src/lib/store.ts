@@ -72,7 +72,7 @@ interface AnalysisStore {
   error: string | null
   setAnalyzing: (analyzing: boolean) => void
   setResult: (result: AnalysisResult) => void
-  setError: (error: string) => void
+  setError: (error: string | null) => void
   reset: () => void
 }
 
