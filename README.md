@@ -1,12 +1,12 @@
 # AI 주식 차트 분석기
 
-OpenAI GPT-4 Vision과 GPT-4를 활용하여 사용자가 업로드한 주식 차트 이미지와 관련 데이터를 분석하고, 투자 판단에 도움이 되는 정보를 제공하는 웹사이트입니다.
+OpenAI GPT-4o(Vision)와 FastAPI, Next.js를 활용하여 주식 차트 이미지를 분석하고 투자 조언을 제공하는 웹사이트입니다.
 
 ## 🚀 주요 기능
 
 - **차트 이미지 업로드**: 드래그 앤 드롭 또는 파일 선택으로 차트 이미지 업로드
-- **GPT-4 Vision 차트 분석**: 업로드된 차트 이미지를 AI가 실시간으로 분석
-- **GPT-4 감성 분석**: 시장 감성 및 뉴스 분석
+- **GPT-4o Vision 차트 분석**: 업로드된 차트 이미지를 AI가 실시간으로 분석
+- **감성 분석**: 차트 기반 감성 분석
 - **종합 투자 조언**: AI가 생성한 매수/매도/관망 추천
 - **종합 점수**: 차트, 감성, 패턴 분석을 종합한 점수
 - **실시간 분석**: 실제 AI 모델을 사용한 동적 분석
@@ -15,18 +15,83 @@ OpenAI GPT-4 Vision과 GPT-4를 활용하여 사용자가 업로드한 주식 �
 
 ### 프론트엔드
 
-- **프레임워크**: Next.js 14 (App Router)
-- **언어**: TypeScript
-- **스타일링**: Tailwind CSS
-- **상태 관리**: Zustand
-- **파일 업로드**: react-dropzone
+- **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, **Zustand**
 
 ### 백엔드
 
-- **프레임워크**: FastAPI (Python)
-- **AI 모델**: OpenAI GPT-4 Vision, GPT-4
-- **이미지 처리**: Pillow, OpenCV
-- **HTTP 클라이언트**: requests, aiohttp
+- **FastAPI (Python)**, **OpenAI GPT-4o Vision API**
+- **Pillow, OpenCV** (이미지 처리)
+
+## 📦 배포 및 운영
+
+### Railway (백엔드)
+
+- `https://aistock-production.up.railway.app` (예시)
+- 환경 변수는 Railway 대시보드에서 설정
+- **비용 절감**: 사용하지 않을 때는 Railway에서 "Stop" 버튼으로 서버를 중지 가능
+
+### Vercel (프론트엔드)
+
+- GitHub 연동 후 자동 배포
+- 환경 변수는 Vercel 대시보드에서 설정
+- `BACKEND_URL`에 Railway 백엔드 주소 입력
+
+### 환경 변수 예시
+
+#### backend/.env (로컬 개발)
+
+```
+OPENAI_API_KEY=sk-xxxxxx
+HOST=0.0.0.0
+PORT=8000
+LOG_LEVEL=INFO
+ALLOWED_ORIGINS=https://your-frontend.vercel.app
+```
+
+#### vercel 환경 변수
+
+```
+BACKEND_URL=https://aistock-production.up.railway.app
+NEXT_PUBLIC_APP_NAME=AI 주식 차트 분석기
+NEXT_PUBLIC_APP_VERSION=1.0.0
+```
+
+## ⚡️ 운영/비용 관리
+
+- Railway는 서버가 켜져 있을 때만 과금됨. 필요할 때만 "Start", 사용 후 "Stop" 추천
+- Vercel은 무료 플랜에서는 트래픽 없으면 슬립 상태
+- OpenAI Vision API는 사용량에 따라 과금되므로 주의
+
+## 🛡️ 장애/오류 대응
+
+- 50점만 나오는 경우: OpenAI Vision API 거부(권한/쿼터/프롬프트 문제) 또는 환경 변수 미설정
+- 500 에러: 백엔드에서 OpenAI API 호출 실패, 환경 변수 또는 프롬프트 점검
+- 프론트-백엔드 연결 문제: Vercel의 BACKEND_URL, Railway의 ALLOWED_ORIGINS 환경 변수 확인
+
+## 📝 개발/운영 팁
+
+- 프롬프트는 단순하고 명확하게 작성 (예: "상승/하락/횡보 중 하나로만 판단해서 JSON으로 답변하세요.")
+- OpenAI Vision 권한/쿼터/비용 항상 체크
+- 배포 후 환경 변수 변경 시 반드시 재배포
+- Railway/Vercel 모두 환경 변수는 대시보드에서 관리
+
+## 📋 사용법
+
+1. **차트 이미지 업로드**: 메인 페이지에서 주식 차트 이미지를 드래그 앤 드롭하거나 파일 선택
+2. **AI 분석 대기**: GPT-4o Vision이 차트를 분석
+3. **결과 확인**: 종합 점수, 예측, 패턴, 감성, 투자 조언 등 확인
+
+## ⚠️ 주의사항
+
+- 이 서비스는 참고용이며, 투자 결정은 본인의 판단에 따라 신중하게 이루어져야 합니다
+- OpenAI API 사용량에 따른 비용이 발생할 수 있습니다
+- AI 분석 결과는 100% 정확하지 않을 수 있습니다
+- 실제 투자 손실에 대한 책임은 사용자에게 있습니다
+
+## 🤝 기여 및 문의
+
+- Pull Request, Issue 환영
+- 궁금한 점은 GitHub Issue로 남겨주세요
 
 ## 📁 프로젝트 구조
 
@@ -96,18 +161,6 @@ npm run dev
 
 브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
 
-## 📋 사용법
-
-1. **차트 이미지 업로드**: 메인 페이지에서 주식 차트 이미지를 드래그 앤 드롭하거나 파일 선택
-2. **AI 분석 대기**: GPT-4 Vision이 차트를 분석하고, GPT-4가 감성 분석을 수행
-3. **결과 확인**:
-   - 종합 점수 및 등급
-   - 가격 변동 예측 (상승/하락 확률)
-   - 기술적 패턴 분석
-   - 시장 감성 분석
-   - AI 투자 조언 (매수/매도/관망)
-   - 상세 분석 정보
-
 ## 🤖 AI 분석 기능
 
 ### GPT-4 Vision 차트 분석
@@ -147,13 +200,6 @@ npm run dev
 - **60-79점**: 좋음 (보통 신뢰도)
 - **40-59점**: 보통 (낮은 신뢰도)
 - **40점 미만**: 나쁨 (매우 낮은 신뢰도)
-
-## ⚠️ 주의사항
-
-- 이 서비스는 **참고용**이며, 투자 결정은 본인의 판단에 따라 신중하게 이루어져야 합니다
-- OpenAI API 사용량에 따른 **비용**이 발생할 수 있습니다
-- AI 분석 결과는 **100% 정확하지 않을 수** 있습니다
-- **실제 투자 손실에 대한 책임**은 사용자에게 있습니다
 
 ## 🔮 향후 계획
 
