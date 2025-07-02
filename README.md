@@ -20,78 +20,13 @@ OpenAI GPT-4o(Vision)와 FastAPI, Next.js를 활용하여 주식 차트 이미�
 ### 백엔드
 
 - **FastAPI (Python)**, **OpenAI GPT-4o Vision API**
-- **Pillow, OpenCV** (이미지 처리)
-
-## 📦 배포 및 운영
-
-### Railway (백엔드)
-
-- `https://aistock-production.up.railway.app` (예시)
-- 환경 변수는 Railway 대시보드에서 설정
-- **비용 절감**: 사용하지 않을 때는 Railway에서 "Stop" 버튼으로 서버를 중지 가능
-
-### Vercel (프론트엔드)
-
-- GitHub 연동 후 자동 배포
-- 환경 변수는 Vercel 대시보드에서 설정
-- `BACKEND_URL`에 Railway 백엔드 주소 입력
-
-### 환경 변수 예시
-
-#### backend/.env (로컬 개발)
-
-```
-OPENAI_API_KEY=sk-xxxxxx
-HOST=0.0.0.0
-PORT=8000
-LOG_LEVEL=INFO
-ALLOWED_ORIGINS=https://your-frontend.vercel.app
-```
-
-#### vercel 환경 변수
-
-```
-BACKEND_URL=https://aistock-production.up.railway.app
-NEXT_PUBLIC_APP_NAME=AI 주식 차트 분석기
-NEXT_PUBLIC_APP_VERSION=1.0.0
-```
-
-## ⚡️ 운영/비용 관리
-
-- Railway는 서버가 켜져 있을 때만 과금됨. 필요할 때만 "Start", 사용 후 "Stop" 추천
-- Vercel은 무료 플랜에서는 트래픽 없으면 슬립 상태
-- OpenAI Vision API는 사용량에 따라 과금되므로 주의
-
-## 🛡️ 장애/오류 대응
-
-- 50점만 나오는 경우: OpenAI Vision API 거부(권한/쿼터/프롬프트 문제) 또는 환경 변수 미설정
-- 500 에러: 백엔드에서 OpenAI API 호출 실패, 환경 변수 또는 프롬프트 점검
-- 프론트-백엔드 연결 문제: Vercel의 BACKEND_URL, Railway의 ALLOWED_ORIGINS 환경 변수 확인
-
-## 📝 개발/운영 팁
-
-- 프롬프트는 단순하고 명확하게 작성 (예: "상승/하락/횡보 중 하나로만 판단해서 JSON으로 답변하세요.")
-- OpenAI Vision 권한/쿼터/비용 항상 체크
-- 배포 후 환경 변수 변경 시 반드시 재배포
-- Railway/Vercel 모두 환경 변수는 대시보드에서 관리
+- **Pillow, OpenCV**
 
 ## 📋 사용법
 
 1. **차트 이미지 업로드**: 메인 페이지에서 주식 차트 이미지를 드래그 앤 드롭하거나 파일 선택
 2. **AI 분석 대기**: GPT-4o Vision이 차트를 분석
 3. **결과 확인**: 종합 점수, 예측, 패턴, 감성, 투자 조언 등 확인
-
-## ⚠️ 주의사항
-
-- 이 서비스는 참고용이며, 투자 결정은 본인의 판단에 따라 신중하게 이루어져야 합니다
-- OpenAI API 사용량에 따른 비용이 발생할 수 있습니다
-- AI 분석 결과는 100% 정확하지 않을 수 있습니다
-- 실제 투자 손실에 대한 책임은 사용자에게 있습니다
-
-## 🤝 기여 및 문의
-
-- Pull Request, Issue 환영
-- 궁금한 점은 GitHub Issue로 남겨주세요
 
 ## 📁 프로젝트 구조
 
@@ -150,16 +85,12 @@ pip install -r requirements.txt
 python main.py
 ```
 
-백엔드 서버가 `http://localhost:8000`에서 실행됩니다.
-
 ### 3. 프론트엔드 실행
 
 ```bash
 npm install
 npm run dev
 ```
-
-브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
 
 ## 🤖 AI 분석 기능
 
@@ -207,8 +138,6 @@ npm run dev
 - [ ] 사용자 인증 시스템
 - [ ] 분석 히스토리 저장
 - [ ] 포트폴리오 관리 기능
-- [ ] 모바일 앱 개발
-- [ ] 다국어 지원
 - [ ] 고급 차트 라이브러리 연동
 
 ## 📄 라이선스
