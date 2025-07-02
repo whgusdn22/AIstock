@@ -1,6 +1,6 @@
 # AI 주식 차트 분석기
 
-OpenAI GPT-4o(Vision)와 FastAPI, Next.js를 활용하여 주식 차트 이미지를 분석하고 투자 조언을 제공하는 웹사이트입니다.
+OpenAI GPT-4o(Vision)를 활용하여 주식 차트 이미지를 분석하고 투자 조언을 제공하는 웹사이트입니다. (배포X)
 
 ## 🚀 주요 기능
 
@@ -132,25 +132,9 @@ npm run dev
 - **40-59점**: 보통 (낮은 신뢰도)
 - **40점 미만**: 나쁨 (매우 낮은 신뢰도)
 
-## 🔮 향후 계획
-
-- [ ] 실시간 주가 데이터 연동
-- [ ] 사용자 인증 시스템
-- [ ] 분석 히스토리 저장
-- [ ] 포트폴리오 관리 기능
-- [ ] 고급 차트 라이브러리 연동
-
 ## 📄 라이선스
 
 MIT License
-
-## 🤝 기여하기
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 📞 문의
 
